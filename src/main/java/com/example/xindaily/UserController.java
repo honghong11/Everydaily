@@ -18,16 +18,16 @@ public class UserController {
 
     @RequestMapping(value = "/getUsers",method = RequestMethod.GET)
     @ResponseBody
-    public int getUsers(String name,String passwd){
+    public String getUsers(String name,String passwd){
 
         String sql = "select * from user";
         List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 
         for (Map<String, Object> stringObjectMap : list) {
             if (stringObjectMap.containsValue(name)) {
-                return 200;
+                return "success";
             }
         }
-        return -1;
+        return "login failed";
     }
 }
